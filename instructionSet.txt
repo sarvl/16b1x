@@ -1,0 +1,51 @@
+instructions:
+ 0  mvr 	R0, R1   	# R0 = R1
+ 1  mvi 	R0, imm8 	# R0 = imm8
+
+ 2  lod 	R0, R1   	# R0 = M[R1]
+ 3  str 	R0, R1   	# M[R1] = R0
+
+ 4  add 	R0, R1   	# R0 += R1
+ 5  sub 	R0, R1   	# R0 -= R1
+
+ 6  and 	R0, R1   	# R0 &= R1
+ 7  or  	R0, R1   	# R0 |= R1
+ 8  xor 	R0, R1   	# R0 ^= R1
+ 9  not 	R0, R1     	# R0 = ~R1
+
+10  sll 	R0, R1   	# R0 <<= R1
+11  srl 	R0, R1   	# R0 >>= R1
+ 
+12  jnz 	R0, imm8 	# if(R0 != 0) PC = imm8
+
+
+every instruction is encoded in 16bits, which is also the size of the word
+
+reg format:
+15    12 11  8 7   6 5      0
+[OPCODE] [R0 ] [R1 ] [UNUSED]
+
+imm format:
+15    12 11  8 7    0 
+[OPCODE] [R0 ] [IMM8] 
+
+
+16 bit Registers:
+Z (0): hardwired to be 0 
+A (1): GP register 0
+B (2): GP register 1
+C (3): GP register 2
+D (4): GP register 3
+E (5): GP register 4
+F (6): GP register 5
+SP(7): Stack Pointer
+
+
+RAM layout:
+0x0000..0x00FF STACK
+0x0100..0xFFFF General Purpose RAM
+
+
+ROM: 
+0x00..0xFF instructions
+
